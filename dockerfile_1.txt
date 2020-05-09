@@ -1,0 +1,23 @@
+把一个python中的flask web程序打包成镜像，这个镜像包括python编译环境和flask web程序输出hello world的python代码。
+
+dockerfile
+
+FROM python:3.6
+LABEL maintainer="Anthony<xxx.yy@gmail.com>"
+RUN pip install flask
+COPY app.py /app/
+WORKDIR /app
+EXPOSE 5000
+CMD ["python","/app/app.py"]
+
+app.py
+
+from flask import Flask
+app = Flask(__name__)
+@app.route('/')
+def hello():
+    return "helo docker"
+if __name__ == '__main__':
+    app.run()
+
+https://www.jianshu.com/p/6452596c4edb
